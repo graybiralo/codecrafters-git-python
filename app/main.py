@@ -17,9 +17,9 @@ def init():
 
     print("Initialized git directory")
 
-# def get_object_path(sha):
-#     """Return the file path for a given SHA-1 hash in the .git/objects directory."""
-#     return os.path.join(".git", "objects", sha[0:2], sha[2:])
+def get_object_path(sha):
+    """Return the file path for a given SHA-1 hash in the .git/objects directory."""
+    return os.path.join(".git", "objects", sha[0:2], sha[2:])
 
 # def write_object(data):
 #     """Write a compressed Git object to .git/objects and return its SHA-1 hash."""
