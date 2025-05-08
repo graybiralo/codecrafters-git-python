@@ -1,59 +1,56 @@
-[![progress-banner](https://backend.codecrafters.io/progress/git/35adc1c1-d771-4533-9766-721b1adbe3c3)](https://app.codecrafters.io/users/codecrafters-bot?r=2qF)
+# OwnGit – A Git Implementation in Python
 
-This is a starting point for Python solutions to the
-["Build Your Own Git" Challenge](https://codecrafters.io/challenges/git).
+**OwnGit** is a custom Git implementation built from scratch in Python, inspired by how Git actually works under the hood.  
+This project is part of the [Codecrafters Git Challenge](https://codecrafters.io), where developers recreate core Git features step-by-step.
 
-In this challenge, you'll build a small Git implementation that's capable of
-initializing a repository, creating commits and cloning a public repository.
-Along the way we'll learn about the `.git` directory, Git objects (blobs,
-commits, trees etc.), Git's transfer protocols and more.
+---
 
-**Note**: If you're viewing this repo on GitHub, head over to
-[codecrafters.io](https://codecrafters.io) to try the challenge.
+## Features Implemented
 
-# Passing the first stage
+- `init`: Initialize a new Git repository.
+- `hash-object`: Create Git blob objects from files and store them.
+- `cat-file`: Read and print the content of Git objects.
+- `write-tree`: Build a tree object from the current working directory.
+- `commit-tree`: Create a commit object referencing a tree (and optionally a parent).
+- `ls-tree`: List files/directories in a tree object.
+- `clone`: Clone a remote Git repository via Smart HTTP and display remote references.
 
-The entry point for your Git implementation is in `app/main.py`. Study and
-uncomment the relevant code, and push your changes to pass the first stage:
+---
 
-```sh
-git commit -am "pass 1st stage" # any msg
-git push origin master
+##  Installation
+
+```bash
+git clone https://github.com/yourusername/OwnGit.git
+cd OwnGit
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
 ```
 
-That's all!
 
-# Stage 2 & beyond
 
-Note: This section is for stages 2 and beyond.
+##  Usage
 
-1. Ensure you have `python` installed locally
-1. Run `./your_program.sh` to run your Git implementation, which is implemented
-   in `app/main.py`.
-1. Commit your changes and run `git push origin master` to submit your solution
-   to CodeCrafters. Test output will be streamed to your terminal.
+You can use OwnGit by invoking its functionality from the command line using the following commands.
 
-# Testing locally
+```bash
+# Initialize a new Git repository
+python3 app/main.py init
 
-The `your_program.sh` script is expected to operate on the `.git` folder inside
-the current working directory. If you're running this inside the root of this
-repository, you might end up accidentally damaging your repository's `.git`
-folder.
+# Hash a file and store it as a Git object
+python3 app/main.py hash-object -w example.txt
 
-We suggest executing `your_program.sh` in a different folder when testing
-locally. For example:
+# Print the content of a Git object (blob) by SHA
+python3 app/main.py cat-file -p <sha>
 
-```sh
-mkdir -p /tmp/testing && cd /tmp/testing
-/path/to/your/repo/your_program.sh init
-```
+# Write a tree object from current directory contents
+python3 app/main.py write-tree
 
-To make this easier to type out, you could add a
-[shell alias](https://shapeshed.com/unix-alias/):
+# List files in a tree object by SHA
+python3 app/main.py ls-tree --name-only <tree_sha>
 
-```sh
-alias mygit=/path/to/your/repo/your_program.sh
+# Commit a tree with a message
+python3 app/main.py commit-tree <tree_sha> -m "Initial commit"
 
-mkdir -p /tmp/testing && cd /tmp/testing
-mygit init
-```
+# Clone a remote Git repository over HTTPS
+python3 app/main.py clone https://github.com/user/repo.git my_local_repo
